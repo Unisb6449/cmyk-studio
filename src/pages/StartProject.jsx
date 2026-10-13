@@ -202,8 +202,7 @@ const StartProject = () => {
 
               <FiArrowUpRight
                 size={18}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </a>
           </div>
 
@@ -288,7 +287,8 @@ const StartProject = () => {
               const Icon = step.icon;
 
               return (
-                <article key={step.number} className="relative">
+                <article key={step.number}
+                  className="relative rounded-2xl border border-gray-100 bg-white p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6">
                   <div className="flex items-center justify-between">
                     <span
                       className="flex h-14 w-14 items-center justify-center rounded-full text-[#111111]"
