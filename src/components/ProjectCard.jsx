@@ -14,14 +14,12 @@ const ProjectCard = ({ project }) => {
               loop
               playsInline
               preload="metadata"
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/>
           ) : (
             <img
               src={project.image}
               alt={project.title}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/>
           )
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-gray-400">

@@ -30,14 +30,12 @@ const PortfolioPreview = () => {
 
           <Link
             to="/portfolio"
-            className="group inline-flex w-fit items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white"
-          >
+            className="group inline-flex w-fit items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white">
             View All Projects
 
             <FiArrowUpRight
               size={17}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
           </Link>
         </div>
 
@@ -46,8 +44,7 @@ const PortfolioPreview = () => {
           {projects.slice(0, 4).map((project) => (
             <ProjectCard
               key={project.title}
-              project={project}
-            />
+              project={project}/>
           ))}
         </div>
 

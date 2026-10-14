@@ -6,8 +6,7 @@ const ServiceCard = ({ service, index }) => {
   return (
     <article
       className="group relative overflow-hidden rounded-[2rem] border border-gray-200 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl sm:p-8"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
+      style={{ animationDelay: `${index * 100}ms` }}>
       {/* Accent */}
       <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-[3rem] bg-[#FFCC00] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 

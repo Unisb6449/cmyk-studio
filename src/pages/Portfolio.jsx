@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import {
   FiArrowUpRight,
   FiImage,
-  FiPlay,
-  FiCheck,
   FiPrinter,
   FiZap,
   FiShield,
@@ -21,6 +19,82 @@ const categories = [
   "Apparel",
   "Promotional",
 ];
+
+// Additional Portfolio media stays in this file.
+// Do not add these items to projects.js because Home uses that file.
+const categoryMedia = {
+  Printing: [
+    {
+      title: "Printing Project 1",
+      category: "Printing",
+      type: "video",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/video/upload/v1790204713/cmyk-9.mp4",
+    },
+    {
+      title: "Corporate Print Production",
+      category: "Printing",
+      type: "video",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/video/upload/v1790204387/cmyk-3.mp4",
+    },
+    {
+      title: "Printing Project 3",
+      category: "Printing",
+      type: "video",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/video/upload/v1790204378/cmyk-1.mp4",
+    },
+    {
+      title: "Printing Project 4",
+      category: "Printing",
+      type: "video",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/video/upload/v1790203726/cmyk-hero-video.mp4",
+    },
+    {
+      title: "Printing Project 5",
+      category: "Printing",
+      type: "image",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/image/upload/v1791973831/IMG_4572.png",
+    },
+  ],
+
+  Branding: [
+    {
+      title: "Branded Corporate Materials",
+      category: "Branding",
+      type: "video",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/video/upload/v1790204462/cmyk-8.mp4",
+    },
+    {
+      title: "Branding Project",
+      category: "Branding",
+      type: "image",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/image/upload/v1791975883/IMG_4581.png",
+    },
+  ],
+
+  Apparel: [
+    {
+      title: "Custom Apparel Project",
+      category: "Apparel",
+      type: "image",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/image/upload/v1790207115/cmyk-10.jpg",
+    },
+    {
+      title: "Custom Apparel Production",
+      category: "Apparel",
+      type: "video",
+      image:
+        "https://res.cloudinary.com/lglx4hzk/video/upload/v1790204450/cmyk-6.mp4",
+    },
+  ],
+};
 
 const strengths = [
   {
@@ -57,24 +131,27 @@ function ProjectMedia({ project, featured = false }) {
   const mediaClass =
     "h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]";
 
-  if (project.video) {
+  // Shared projects.js stores video URLs in the image property.
+  // This also supports projects that use a separate video property.
+  const videoSrc =
+    project.video ||
+    (project.type === "video" ? project.image : null);
+
+  if (videoSrc) {
     return (
       <div className="absolute inset-0">
         <video
           className={mediaClass}
-          src={project.video}
-          poster={project.poster || project.image || undefined}
+          src={videoSrc}
+          poster={project.poster || undefined}
           muted
           autoPlay
           loop
           playsInline
           preload="metadata"
-          aria-label={`${project.title} video`}
-        />
+          aria-label={`${project.title} video`}/>
 
-        <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-[#111111] shadow-lg">
-          <FiPlay size={16} fill="currentColor" />
-        </span>
+        
       </div>
     );
   }
@@ -85,8 +162,7 @@ function ProjectMedia({ project, featured = false }) {
         src={project.image}
         alt={project.title}
         loading={featured ? "eager" : "lazy"}
-        className={mediaClass}
-      />
+        className={mediaClass}/>
     );
   }
 
@@ -111,8 +187,7 @@ function ProjectCard({ project, index }) {
   return (
     <article
       className="group min-w-0 overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl"
-      style={{ animationDelay: `${index * 60}ms` }}
-    >
+      style={{ animationDelay: `${index * 60}ms` }}>
       <div className="relative aspect-[4/3] overflow-hidden bg-[#E9ECEF]">
         <ProjectMedia project={project} />
 
@@ -137,13 +212,24 @@ function ProjectCard({ project, index }) {
 
           <span
             aria-hidden="true"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-[#111111] transition-all duration-300 group-hover:border-[#FFCC00] group-hover:bg-[#FFCC00]"
-          >
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-[#111111] transition-all duration-300 group-hover:border-[#FFCC00] group-hover:bg-[#FFCC00]">
             <FiArrowUpRight size={17} />
           </span>
         </div>
       </div>
     </article>
+  );
+}
+
+// Simple media-only display for category galleries.
+// It deliberately does not add a ProjectCard content wrapper.
+function GalleryMedia({ project }) {
+  return (
+    <div
+      className="group relative aspect-[4/3] min-w-0 overflow-hidden rounded-2xl bg-[#E9ECEF]"
+      aria-label={project.title}>
+      <ProjectMedia project={project} />
+    </div>
   );
 }
 
@@ -157,9 +243,19 @@ const Portfolio = () => {
           (project) => project.category === activeCategory
         );
 
+  const directMedia = categoryMedia[activeCategory] || null;
+
+  const displayedCount = directMedia
+    ? directMedia.length
+    : filteredProjects.length;
+
   const featuredProject =
-    projects.find((project) => project.video || project.image) ||
-    projects[0];
+    projects.find(
+      (project) =>
+        project.video ||
+        project.type === "video" ||
+        project.image
+    ) || projects[0];
 
   return (
     <main>
@@ -192,14 +288,12 @@ const Portfolio = () => {
 
             <Link
               to="/start-project"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white"
-            >
+              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white">
               Start a Project
 
               <FiArrowUpRight
                 size={18}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </Link>
           </div>
 
@@ -207,15 +301,11 @@ const Portfolio = () => {
             <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-[#FFCC00] sm:-right-5 sm:-top-5" />
 
             <div className="group relative z-10 aspect-[4/3] overflow-hidden rounded-2xl bg-[#252525]">
-              <ProjectMedia project={featuredProject} featured />
-
-              {!featuredProject.image && !featuredProject.video && (
-                <div className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-black/70 via-transparent to-transparent p-6">
-                  <p className="text-sm font-semibold text-white">
-                    CMYK Studios Project Showcase
-                  </p>
-                </div>
-              )}
+              <img
+                src="https://res.cloudinary.com/lglx4hzk/image/upload/v1791977550/IMG_4582.png"
+                alt="CMYK Studios portfolio showcase"
+                loading="eager"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"/>
             </div>
 
             <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#00A8FF] sm:-bottom-5 sm:-left-5" />
@@ -251,17 +341,16 @@ const Portfolio = () => {
               </p>
             </div>
 
-            <p
-              className="text-sm text-gray-500"
-              aria-live="polite"
-            >
-              {filteredProjects.length}{" "}
-              {filteredProjects.length === 1 ? "project" : "projects"}
+            <p className="text-sm text-gray-500" aria-live="polite">
+              {displayedCount}{" "}
+              {displayedCount === 1 ? "project" : "projects"}
             </p>
           </div>
 
           {/* CATEGORY FILTERS */}
-          <div className="mt-9 flex flex-wrap gap-2.5" aria-label="Filter projects by category">
+          <div
+            className="mt-9 flex flex-wrap gap-2.5"
+            aria-label="Filter projects by category">
             {categories.map((category) => {
               const isActive = activeCategory === category;
 
@@ -275,31 +364,36 @@ const Portfolio = () => {
                     isActive
                       ? "border-[#111111] bg-[#111111] text-white"
                       : "border-gray-200 bg-[#F7F9FA] text-gray-600 hover:border-[#111111] hover:text-[#111111]"
-                  }`}
-                >
+                  }`}>
                   {category}
                 </button>
               );
             })}
           </div>
 
-          {/* FILTERED PROJECT CARDS */}
-          {filteredProjects.length > 0 ? (
+          {/* FILTERED PROJECT GALLERY */}
+          {directMedia ? (
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {directMedia.map((project) => (
+                <GalleryMedia
+                  key={project.title}
+                  project={project}/>
+              ))}
+            </div>
+          ) : filteredProjects.length > 0 ? (
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filteredProjects.map((project, index) => (
                 <ProjectCard
-                  key={project.id}
+                  key={project.id || project.title}
                   project={project}
-                  index={index}
-                />
+                  index={index}/>
               ))}
             </div>
           ) : (
             <div className="mt-10 rounded-2xl border border-dashed border-gray-300 bg-[#F7F9FA] px-6 py-16 text-center">
               <FiImage
                 size={32}
-                className="mx-auto text-gray-400"
-              />
+                className="mx-auto text-gray-400"/>
 
               <h3 className="mt-4 text-xl font-bold text-[#111111]">
                 No projects in this category yet
@@ -312,8 +406,7 @@ const Portfolio = () => {
               <button
                 type="button"
                 onClick={() => setActiveCategory("All")}
-                className="mt-5 rounded-full bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#FFCC00] hover:text-[#111111]"
-              >
+                className="mt-5 rounded-full bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#FFCC00] hover:text-[#111111]">
                 View All Projects
               </button>
             </div>
@@ -351,14 +444,12 @@ const Portfolio = () => {
 
               <Link
                 to="/services"
-                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white"
-              >
+                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white">
                 Explore Our Services
 
                 <FiArrowUpRight
                   size={17}
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
               </Link>
             </div>
 
@@ -369,8 +460,7 @@ const Portfolio = () => {
                 return (
                   <article
                     key={strength.title}
-                    className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-7"
-                  >
+                    className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-7">
                     <span
                       className="flex h-12 w-12 items-center justify-center rounded-xl"
                       style={{
@@ -379,8 +469,7 @@ const Portfolio = () => {
                           strength.accent === "#FFCC00"
                             ? "#111111"
                             : "#FFFFFF",
-                      }}
-                    >
+                      }}>
                       <Icon size={22} />
                     </span>
 
@@ -472,14 +561,12 @@ const Portfolio = () => {
 
           <Link
             to="/start-project"
-            className="group relative z-10 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white"
-          >
+            className="group relative z-10 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white">
             Start a Project
 
             <FiArrowUpRight
               size={18}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
           </Link>
         </div>
       </section>
