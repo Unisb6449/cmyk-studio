@@ -106,32 +106,23 @@ const Services = () => {
 
             <Link
               to="/start-project"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white"
-            >
+              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white">
               Discuss Your Project
               <FiArrowUpRight
                 size={18}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </Link>
           </div>
 
           <div className="relative">
             <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-[#00A8FF] sm:-right-5 sm:-top-5" />
 
-            <div className="relative z-10 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[#202020] p-8 text-center">
-              <div>
-                <FiPrinter
-                  size={48}
-                  className="mx-auto text-[#FFCC00]"
-                />
-                <p className="mt-5 text-lg font-bold text-white">
-                  Print. Brand. Create.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-gray-400">
-                  CMYK Studios production showcase
-                </p>
-              </div>
+            <div className="relative z-10 aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10 bg-[#202020]">
+              <img
+                src="https://res.cloudinary.com/lglx4hzk/image/upload/v1791975883/IMG_4581.png"
+                alt="CMYK Studios printing, branding, and creative production"
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="eager"/>
             </div>
 
             <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#FF2095] sm:-bottom-5 sm:-left-5" />
@@ -173,14 +164,12 @@ const Services = () => {
               return (
                 <article
                   key={service.number}
-                  className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-lg sm:p-7"
-                >
+                  className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-lg sm:p-7">
                   <div className="flex items-center justify-between">
                     <span
                       className="flex h-12 w-12 items-center justify-center rounded-xl text-[#111111]"
-                      style={{ backgroundColor: service.accent }}
-                    >
-                      <Icon size={23} />
+                      style={{ backgroundColor: service.accent }}>
+                      <Icon size={23}/>
                     </span>
 
                     <span className="text-sm font-semibold text-gray-400">
@@ -198,13 +187,11 @@ const Services = () => {
 
                   <Link
                     to="/start-project"
-                    className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-bold text-[#111111] transition-colors hover:text-[#FF2095]"
-                  >
+                    className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-bold text-[#111111] transition-colors hover:text-[#FF2095]">
                     Discuss This Service
                     <FiArrowUpRight
                       size={17}
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
+                      className="transition-transform duration-300 group-hover:translate-x-1"/>
                   </Link>
                 </article>
               );
@@ -219,19 +206,13 @@ const Services = () => {
           <div className="relative">
             <div className="absolute -left-3 -top-3 h-16 w-16 rounded-2xl bg-[#FFCC00]" />
 
-            <div className="relative z-10 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl bg-[#E9ECEF] p-8 text-center">
-              <div>
-                <FiPrinter
-                  size={42}
-                  className="mx-auto text-[#111111]"
-                />
-                <p className="mt-4 font-semibold text-[#111111]">
-                  Sublimation Production Image
-                </p>
-                <p className="mt-2 text-sm text-gray-500">
-                  Replace with real CMYK Studios photography
-                </p>
-              </div>
+
+            <div className="relative z-10 aspect-[4/3] overflow-hidden rounded-2xl bg-[#E9ECEF]">
+              <img
+                src="https://res.cloudinary.com/lglx4hzk/image/upload/v1791973831/IMG_4572.png"
+                alt="CMYK Studios sublimation printing production"
+                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="eager"/>
             </div>
 
             <div className="absolute -bottom-3 -right-3 h-16 w-16 rounded-2xl bg-[#00A8FF]" />
@@ -265,8 +246,7 @@ const Services = () => {
               ].map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-sm text-gray-600"
-                >
+                  className="flex items-start gap-3 text-sm text-gray-600">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#00A8FF] text-white">
                     <FiCheck size={12} />
                   </span>
