@@ -45,20 +45,17 @@ const Hero = () => {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Link
               to="/start-project"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#111111] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#FFCC00] hover:text-[#111111]"
-            >
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#111111] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#FFCC00] hover:text-[#111111]">
               Start a Project
 
               <FiArrowUpRight
                 size={18}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </Link>
 
             <Link
               to="/services"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white"
-            >
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white">
               Explore Services
             </Link>
           </div>
@@ -120,8 +117,7 @@ const Hero = () => {
               muted
               loop
               playsInline
-              preload="metadata"
-            />
+              preload="metadata"/>
 
             {/* Subtle Overlay */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />

@@ -529,8 +529,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="projectDetails"
-                  className="text-sm font-semibold text-[#111111]"
-                >
+                  className="text-sm font-semibold text-[#111111]">
                   Project Details <span className="text-[#FF2095]">*</span>
                 </label>
 
@@ -542,8 +541,7 @@ const Contact = () => {
                   className={`${inputClass} resize-y`}
                   required
                   minLength={10}
-                  maxLength={5000}
-                />
+                  maxLength={5000}/>
               </div>
 
               {/* SUBMISSION FEEDBACK */}
@@ -555,18 +553,15 @@ const Contact = () => {
                     formStatus.type === "success"
                       ? "border-green-200 bg-green-50 text-green-800"
                       : "border-red-200 bg-red-50 text-red-700"
-                  }`}
-                >
+                  }`}>
                   {formStatus.type === "success" ? (
                     <FiCheckCircle
                       size={20}
-                      className="mt-0.5 shrink-0"
-                    />
+                      className="mt-0.5 shrink-0"/>
                   ) : (
                     <FiMail
                       size={20}
-                      className="mt-0.5 shrink-0"
-                    />
+                      className="mt-0.5 shrink-0"/>
                   )}
 
                   <p>{formStatus.message}</p>
@@ -576,8 +571,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-7 py-4 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-              >
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-7 py-4 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
                 {isSubmitting ? "Sending Enquiry..." : "Send Message"}
 
                 <FiSend
@@ -612,8 +606,7 @@ const Contact = () => {
                 src="https://maps.google.com/maps?q=No%201%20Omotayo%20Ojo%20Street%2C%20Off%20Allen%20Avenue%2C%20Ikeja%2C%20Lagos%20100001%2C%20Nigeria&output=embed"
                 className="h-[350px] w-full border-0 sm:h-[430px]"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+                referrerPolicy="no-referrer-when-downgrade"/>
 
               <div className="p-6 sm:p-7">
                 <div className="flex items-start gap-4">
@@ -640,14 +633,12 @@ const Contact = () => {
                       )}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="group mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#111111] hover:text-[#00A8FF]"
-                    >
+                      className="group mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#111111] hover:text-[#00A8FF]">
                       Open in Google Maps
 
                       <FiArrowUpRight
                         size={17}
-                        className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                      />
+                        className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
                     </a>
                   </div>
                 </div>
@@ -688,8 +679,7 @@ const Contact = () => {
 
           <Link
             to="/start-project"
-            className="group relative z-10 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#FFCC00]"
-          >
+            className="group relative z-10 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#FFCC00]">
             Start a Project
 
             <FiArrowUpRight

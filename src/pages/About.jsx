@@ -119,12 +119,11 @@ const About = () => {
             <div className="absolute -bottom-5 -left-5 h-20 w-20 rounded-full bg-[#00A8FF]" />
 
             <div className="relative z-10 aspect-[4/3] overflow-hidden rounded-[2rem] bg-[#222222]">
-              {/* Replace with your real CMYK Studio image */}
-              <div className="flex h-full items-center justify-center">
-                <span className="text-sm text-gray-500">
-                  CMYK Studios Image
-                </span>
-              </div>
+              <img
+                src="https://res.cloudinary.com/lglx4hzk/image/upload/v1791973844/IMG_4575.png"
+                alt="CMYK Studios printing and production"
+                className="h-full w-full object-cover"
+                loading="eager"/>
             </div>
           </div>
         </div>
@@ -172,14 +171,12 @@ const About = () => {
 
             <Link
               to="/services"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white"
-            >
+              className="group mt-8 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white">
               Explore Our Services
 
               <FiArrowUpRight
                 size={17}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </Link>
           </div>
 
@@ -187,12 +184,11 @@ const About = () => {
             <div className="absolute -right-4 -top-4 h-24 w-24 rounded-2xl bg-[#FFCC00] sm:-right-5 sm:-top-5" />
 
             <div className="relative z-10 aspect-[4/3] overflow-hidden rounded-[2rem] bg-[#F7F9FA]">
-              {/* Replace with your real CMYK Studio production image */}
-              <div className="flex h-full items-center justify-center">
-                <span className="text-sm text-gray-400">
-                  CMYK Studios Production Image
-                </span>
-              </div>
+              <img
+                src="https://res.cloudinary.com/lglx4hzk/image/upload/v1791973840/IMG_4574.png"
+                alt="CMYK Studios production work"
+                className="h-full w-full object-cover"
+                loading="eager"/>
             </div>
 
             <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-2xl bg-[#00A8FF] sm:-bottom-5 sm:-left-5" />
@@ -267,8 +263,7 @@ const About = () => {
                 {impactValues.map((value) => (
                   <div
                     key={value.letter}
-                    className="flex items-start gap-3"
-                  >
+                    className="flex items-start gap-3">
                     <span
                       className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm font-black"
                       style={{
@@ -277,8 +272,7 @@ const About = () => {
                           value.color === "#FFCC00"
                             ? "#111111"
                             : "#ffffff",
-                      }}
-                    >
+                      }}>
                       {value.letter}
                     </span>
 
@@ -330,14 +324,12 @@ const About = () => {
             {companyStats.map((stat) => (
               <div
                 key={stat.label}
-                className="bg-[#111111] p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-8 lg:p-9"
-              >
+                className="bg-[#111111] p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-8 lg:p-9">
                 <span
                   className="mb-6 block h-1 w-10 rounded-full"
                   style={{
                     backgroundColor: stat.color,
-                  }}
-                />
+                  }}/>
 
                 <p className="text-5xl font-black tracking-[-0.04em] sm:text-6xl">
                   {stat.number}

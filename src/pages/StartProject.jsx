@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
@@ -16,7 +17,6 @@ import {
   FiPenTool,
   FiPhone,
   FiClock,
-  FiSend,
   FiLock,
 } from "react-icons/fi";
 
@@ -97,7 +97,10 @@ const emailPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const businessPhone = import.meta.env.VITE_CMYK_PHONE || "";
 const businessEmail = import.meta.env.VITE_CMYK_EMAIL || "";
-const heroImage = import.meta.env.VITE_CMYK_START_PROJECT_IMAGE || "";
+
+// Cloudinary office image for the Start Project hero section.
+const heroImage =
+  "https://res.cloudinary.com/lglx4hzk/image/upload/v1790203712/cmyk-studio-office.png";
 
 const inputClass =
   "mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-[#111111] outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#00A8FF] focus:ring-2 focus:ring-[#00A8FF]/10";
@@ -166,15 +169,12 @@ const StartProject = () => {
 
   return (
     <main>
-      {/* =====================================================
-          HERO SECTION
-      ===================================================== */}
+      {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#111111] text-white">
         <div className="mx-auto grid min-h-[430px] max-w-7xl items-center gap-10 px-5 py-16 md:px-8 lg:grid-cols-2 lg:px-10 lg:py-20">
           <div className="relative z-10 max-w-xl">
             <div className="mb-6 flex items-center gap-3">
               <span className="h-px w-10 bg-[#FFCC00]" />
-
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
                 Start a Project
               </span>
@@ -196,55 +196,28 @@ const StartProject = () => {
 
             <a
               href="#project-form"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white"
-            >
+              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white">
               Get Started
-
               <FiArrowUpRight
                 size={18}
                 className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </a>
           </div>
 
+          {/* CLOUDINARY OFFICE IMAGE */}
           <div className="relative">
             <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-[#FF2095] sm:-right-5 sm:-top-5" />
 
-            <div className="group relative z-10 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[#202020]">
-              {heroImage ? (
-                <img
-                  src={heroImage}
-                  alt="CMYK Studios production work"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              ) : (
-                <div className="relative flex h-full w-full flex-col justify-between overflow-hidden p-7 sm:p-10">
-                  <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full border-[28px] border-[#00A8FF]/20" />
-
-                  <div className="relative z-10 flex items-center gap-3">
-                    <span className="h-10 w-2 -skew-x-12 bg-[#00A8FF]" />
-                    <span className="h-10 w-2 -skew-x-12 bg-[#FF2095]" />
-                    <span className="h-10 w-2 -skew-x-12 bg-[#FFCC00]" />
-
-                    <span className="text-sm font-black tracking-widest">
-                      CMYK STUDIOS
-                    </span>
-                  </div>
-
-                  <div className="relative z-10">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
-                      Print · Brand · Create
-                    </p>
-
-                    <h2 className="mt-4 max-w-sm text-3xl font-black leading-tight sm:text-4xl">
-                      Your next project starts here.
-                    </h2>
-
-                    <p className="mt-3 text-sm leading-6 text-gray-400">
-                      Let&apos;s turn your brief into a clear production plan.
-                    </p>
-                  </div>
-                </div>
-              )}
+            <div className="group relative z-10 aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10 bg-[#202020]">
+              <img
+                src={heroImage}
+                alt="CMYK Studios office and production workspace"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="eager"
+                fetchPriority="high"
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}/>
             </div>
 
             <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#00A8FF] sm:-bottom-5 sm:-left-5" />
@@ -252,16 +225,13 @@ const StartProject = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          PROJECT PROCESS
-      ===================================================== */}
+      {/* PROJECT PROCESS */}
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-10">
           <div className="grid gap-7 lg:grid-cols-[1fr_0.8fr] lg:items-end">
             <div>
               <div className="mb-5 flex items-center gap-3">
                 <span className="h-px w-10 bg-[#00A8FF]" />
-
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">
                   Why Start a Project?
                 </span>
@@ -287,13 +257,13 @@ const StartProject = () => {
               const Icon = step.icon;
 
               return (
-                <article key={step.number}
+                <article
+                  key={step.number}
                   className="relative rounded-2xl border border-gray-100 bg-white p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6">
                   <div className="flex items-center justify-between">
                     <span
                       className="flex h-14 w-14 items-center justify-center rounded-full text-[#111111]"
-                      style={{ backgroundColor: step.color }}
-                    >
+                      style={{ backgroundColor: step.color }}>
                       <Icon size={23} />
                     </span>
 
@@ -322,19 +292,15 @@ const StartProject = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          PROJECT FORM + SERVICE SIDEBAR
-      ===================================================== */}
+      {/* PROJECT FORM AND SERVICE SIDEBAR */}
       <section
         id="project-form"
-        className="scroll-mt-24 bg-[#F7F9FA] py-16 sm:py-20 lg:py-24"
-      >
+        className="scroll-mt-24 bg-[#F7F9FA] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl items-start gap-7 px-5 md:px-8 lg:grid-cols-[1.55fr_0.85fr] lg:px-10">
           {/* PROJECT BRIEF FORM */}
           <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
             <div className="mb-5 flex items-center gap-3">
               <span className="h-px w-10 bg-[#00A8FF]" />
-
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">
                 Project Details
               </span>
@@ -356,11 +322,9 @@ const StartProject = () => {
                 <div>
                   <label
                     htmlFor="project-fullName"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Full Name <span className="text-[#FF2095]">*</span>
                   </label>
-
                   <input
                     id="project-fullName"
                     name="fullName"
@@ -369,18 +333,15 @@ const StartProject = () => {
                     placeholder="Your full name"
                     className={inputClass}
                     required
-                    maxLength={100}
-                  />
+                    maxLength={100}/>
                 </div>
 
                 <div>
                   <label
                     htmlFor="project-companyName"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Company / Organisation
                   </label>
-
                   <input
                     id="project-companyName"
                     name="companyName"
@@ -388,8 +349,7 @@ const StartProject = () => {
                     autoComplete="organization"
                     placeholder="Your company name"
                     className={inputClass}
-                    maxLength={150}
-                  />
+                    maxLength={150}/>
                 </div>
               </div>
 
@@ -398,11 +358,9 @@ const StartProject = () => {
                 <div>
                   <label
                     htmlFor="project-email"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Email Address <span className="text-[#FF2095]">*</span>
                   </label>
-
                   <input
                     id="project-email"
                     name="email"
@@ -411,18 +369,16 @@ const StartProject = () => {
                     placeholder="you@example.com"
                     className={inputClass}
                     required
-                    maxLength={254}
-                  />
+                    maxLength={254}/>
                 </div>
 
                 <div>
                   <label
                     htmlFor="project-phone"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
-                    Phone / WhatsApp <span className="text-[#FF2095]">*</span>
+                    className="text-sm font-semibold text-[#111111]">
+                    Phone / WhatsApp{" "}
+                    <span className="text-[#FF2095]">*</span>
                   </label>
-
                   <input
                     id="project-phone"
                     name="phone"
@@ -431,8 +387,7 @@ const StartProject = () => {
                     placeholder="+234 ..."
                     className={inputClass}
                     required
-                    maxLength={30}
-                  />
+                    maxLength={30}/>
                 </div>
               </div>
 
@@ -441,19 +396,16 @@ const StartProject = () => {
                 <div>
                   <label
                     htmlFor="project-service"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Service Interested In{" "}
                     <span className="text-[#FF2095]">*</span>
                   </label>
-
                   <select
                     id="project-service"
                     name="service"
                     defaultValue=""
                     className={inputClass}
-                    required
-                  >
+                    required>
                     <option value="" disabled>
                       Select a service
                     </option>
@@ -473,19 +425,16 @@ const StartProject = () => {
                 <div>
                   <label
                     htmlFor="project-quantity"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Estimated Quantity
                   </label>
-
                   <input
                     id="project-quantity"
                     name="quantity"
                     type="text"
                     placeholder="e.g. 200 pieces"
                     className={inputClass}
-                    maxLength={100}
-                  />
+                    maxLength={100}/>
                 </div>
               </div>
 
@@ -493,35 +442,22 @@ const StartProject = () => {
               <div>
                 <label
                   htmlFor="project-timeline"
-                  className="text-sm font-semibold text-[#111111]"
-                >
+                  className="text-sm font-semibold text-[#111111]">
                   Expected Timeline
                 </label>
-
                 <select
                   id="project-timeline"
                   name="timeline"
                   defaultValue=""
-                  className={inputClass}
-                >
-                  <option value="">
-                    Select your preferred timeline
-                  </option>
+                  className={inputClass}>
+                  <option value="">Select your preferred timeline</option>
                   <option value="As soon as possible">
                     As soon as possible
                   </option>
-                  <option value="Within 1–2 weeks">
-                    Within 1–2 weeks
-                  </option>
-                  <option value="Within 1 month">
-                    Within 1 month
-                  </option>
-                  <option value="Flexible timeline">
-                    Flexible timeline
-                  </option>
-                  <option value="To be discussed">
-                    To be discussed
-                  </option>
+                  <option value="Within 1–2 weeks">Within 1–2 weeks</option>
+                  <option value="Within 1 month">Within 1 month</option>
+                  <option value="Flexible timeline">Flexible timeline</option>
+                  <option value="To be discussed">To be discussed</option>
                 </select>
               </div>
 
@@ -529,11 +465,9 @@ const StartProject = () => {
               <div>
                 <label
                   htmlFor="project-details"
-                  className="text-sm font-semibold text-[#111111]"
-                >
+                  className="text-sm font-semibold text-[#111111]">
                   Project Details <span className="text-[#FF2095]">*</span>
                 </label>
-
                 <textarea
                   id="project-details"
                   name="projectDetails"
@@ -542,11 +476,10 @@ const StartProject = () => {
                   className={`${inputClass} resize-y`}
                   required
                   minLength={10}
-                  maxLength={5000}
-                />
+                  maxLength={5000}/>
               </div>
 
-              {/* FEEDBACK */}
+              {/* FORM FEEDBACK */}
               {formStatus && (
                 <div
                   role="status"
@@ -555,20 +488,16 @@ const StartProject = () => {
                     formStatus.type === "success"
                       ? "border-green-200 bg-green-50 text-green-800"
                       : "border-red-200 bg-red-50 text-red-700"
-                  }`}
-                >
+                  }`}>
                   {formStatus.type === "success" ? (
                     <FiCheckCircle
                       size={20}
-                      className="mt-0.5 shrink-0"
-                    />
+                      className="mt-0.5 shrink-0"/>
                   ) : (
                     <FiMessageCircle
                       size={20}
-                      className="mt-0.5 shrink-0"
-                    />
+                      className="mt-0.5 shrink-0"/>
                   )}
-
                   <p>{formStatus.message}</p>
                 </div>
               )}
@@ -578,14 +507,11 @@ const StartProject = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-7 py-4 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-                >
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-7 py-4 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white disabled:cursor-not-allowed disabled:opacity-60">
                   {isSubmitting ? "Sending Brief..." : "Submit Project Brief"}
-
                   <FiArrowUpRight
                     size={18}
-                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
                 </button>
 
                 <p className="flex items-start gap-2 text-xs leading-5 text-gray-500">
@@ -615,12 +541,10 @@ const StartProject = () => {
                   return (
                     <div
                       key={service.title}
-                      className="flex items-center gap-3"
-                    >
+                      className="flex items-center gap-3">
                       <span
                         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#111111]"
-                        style={{ backgroundColor: service.color }}
-                      >
+                        style={{ backgroundColor: service.color }}>
                         <Icon size={18} />
                       </span>
 
@@ -634,14 +558,11 @@ const StartProject = () => {
 
               <Link
                 to="/services"
-                className="group mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#111111] transition-colors hover:text-[#FF2095]"
-              >
+                className="group mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#111111] transition-colors hover:text-[#FF2095]">
                 Explore All Services
-
                 <FiArrowUpRight
                   size={16}
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
               </Link>
             </div>
 
@@ -660,10 +581,9 @@ const StartProject = () => {
                   href={`https://wa.me/${businessPhone.replace(/\D/g, "")}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 flex items-center gap-3"
-                >
+                  className="mt-6 flex items-center gap-3">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#00A8FF] text-white">
-                    <FiPhone size={19} />
+                    <FiPhone size={19}/>
                   </span>
 
                   <span>
@@ -680,8 +600,7 @@ const StartProject = () => {
               {businessEmail && (
                 <a
                   href={`mailto:${businessEmail}`}
-                  className="mt-5 flex items-center gap-3"
-                >
+                  className="mt-5 flex items-center gap-3">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#FF2095] text-white">
                     <FiMessageCircle size={19} />
                   </span>
@@ -699,14 +618,11 @@ const StartProject = () => {
 
               <Link
                 to="/contact"
-                className="group mt-6 inline-flex items-center gap-2 rounded-full border border-gray-200 px-5 py-3 text-sm font-semibold text-[#111111] transition-all duration-300 hover:border-[#111111] hover:bg-[#111111] hover:text-white"
-              >
+                className="group mt-6 inline-flex items-center gap-2 rounded-full border border-gray-200 px-5 py-3 text-sm font-semibold text-[#111111] transition-all duration-300 hover:border-[#111111] hover:bg-[#111111] hover:text-white">
                 Visit Contact Page
-
                 <FiArrowUpRight
                   size={16}
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
               </Link>
             </div>
 
@@ -729,9 +645,7 @@ const StartProject = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          FINAL CTA
-      ===================================================== */}
+      {/* FINAL CTA */}
       <section className="bg-white px-5 py-12 md:px-8 lg:px-10">
         <div className="relative mx-auto flex max-w-7xl flex-col gap-7 overflow-hidden rounded-[2rem] bg-[#111111] px-7 py-10 text-white sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-14 lg:py-12">
           <div className="pointer-events-none absolute -bottom-10 -left-10 h-28 w-28 rounded-full bg-[#00A8FF]" />
@@ -760,14 +674,11 @@ const StartProject = () => {
 
           <a
             href="#project-form"
-            className="group relative z-10 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white"
-          >
+            className="group relative z-10 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white">
             Complete Your Brief
-
             <FiArrowUpRight
               size={18}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
           </a>
         </div>
       </section>

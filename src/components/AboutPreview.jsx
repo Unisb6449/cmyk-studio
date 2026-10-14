@@ -37,13 +37,11 @@ const AboutPreview = () => {
 
           <Link
             to="/about"
-            className="group mt-8 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white"
-          >
+            className="group mt-8 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-semibold text-[#111111] transition-all duration-300 hover:bg-[#111111] hover:text-white">
             Learn More
             <FiArrowUpRight
               size={17}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
           </Link>
         </div>
 
@@ -55,8 +53,7 @@ const AboutPreview = () => {
             <img
               src="https://res.cloudinary.com/lglx4hzk/image/upload/v1790203712/cmyk-studio-office.png"
               alt="CMYK Studios Project Image"
-              className="h-full w-full object-cover"
-            />
+              className="h-full w-full object-cover"/>
           </div>
 
           <div className="absolute -bottom-3 -left-3 h-16 w-16 rounded-2xl bg-[#00A8FF] sm:-bottom-5 sm:-left-5" />

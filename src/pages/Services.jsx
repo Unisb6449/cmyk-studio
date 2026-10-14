@@ -277,13 +277,11 @@ const Services = () => {
 
             <Link
               to="/start-project"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white"
-            >
+              className="group mt-8 inline-flex items-center gap-2 rounded-full border border-[#111111] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-[#111111] hover:text-white">
               Start a Project
               <FiArrowUpRight
                 size={17}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </Link>
           </div>
         </div>
