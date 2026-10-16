@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
@@ -45,7 +46,6 @@ const Contact = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     setFormStatus(null);
 
     if (!emailServiceId || !emailTemplateId || !emailPublicKey) {
@@ -136,57 +136,59 @@ const Contact = () => {
 
             <a
               href="#contact-form"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white"
-            >
+              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#FFCC00] px-6 py-3.5 text-sm font-bold text-[#111111] transition-colors duration-300 hover:bg-white">
               Tell Us About Your Project
 
               <FiArrowUpRight
                 size={18}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
             </a>
           </div>
 
+          {/* HERO IMAGE WITH ORIGINAL WRITE-UP */}
           <div className="relative">
             <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-[#FFCC00] sm:-right-5 sm:-top-5" />
 
-            <div className="group relative z-10 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[#202020]">
-              {CONTACT.heroImage ? (
-                <img
-                  src={CONTACT.heroImage}
-                  alt="CMYK Studios workspace"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              ) : (
-                <div className="relative flex h-full w-full flex-col justify-between overflow-hidden p-7 sm:p-10">
-                  <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full border-[28px] border-[#FF2095]/20" />
+            {/* Image fills the complete box */}
+            <div className="group relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2rem] border border-white/10 bg-[#202020]">
+              <img
+                src={
+                  CONTACT.heroImage ||
+                  "https://res.cloudinary.com/lglx4hzk/image/upload/v1792035330/IMG_4593.png"
+                }
+                alt="CMYK Studios workspace"
+                className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"/>
 
-                  <div className="relative z-10 flex items-center gap-3">
-                    <span className="h-10 w-2 -skew-x-12 bg-[#00A8FF]" />
-                    <span className="h-10 w-2 -skew-x-12 bg-[#FF2095]" />
-                    <span className="h-10 w-2 -skew-x-12 bg-[#FFCC00]" />
+              {/* Dark overlay for readable text */}
+              <div className="absolute inset-0 bg-black/55" />
 
-                    <span className="text-sm font-black tracking-widest">
-                      CMYK STUDIOS
-                    </span>
-                  </div>
+              {/* Original write-up */}
+              <div className="relative z-10 flex h-full w-full flex-col justify-between p-7 sm:p-10">
+                <div className="flex items-center gap-3">
+                  <span className="h-10 w-2 -skew-x-12 bg-[#00A8FF]" />
+                  <span className="h-10 w-2 -skew-x-12 bg-[#FF2095]" />
+                  <span className="h-10 w-2 -skew-x-12 bg-[#FFCC00]" />
 
-                  <div className="relative z-10">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
-                      Print · Brand · Create
-                    </p>
+                  <span className="text-sm font-black tracking-widest text-white">
+                    CMYK STUDIOS
+                  </span>
+                </div>
 
-                    <h2 className="mt-4 max-w-sm text-3xl font-black leading-tight sm:text-4xl">
-                      Every great project starts with a conversation.
-                    </h2>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-200">
+                    Print · Brand · Create
+                  </p>
 
-                    <div className="mt-6 flex items-center gap-3 text-sm text-gray-400">
-                      <FiMessageCircleFallback />
-                      Let's discuss your next project.
-                    </div>
+                  <h2 className="mt-4 max-w-sm text-3xl font-black leading-tight text-white sm:text-4xl">
+                    Every great project starts with a conversation.
+                  </h2>
+
+                  <div className="mt-6 flex items-center gap-3 text-sm text-gray-200">
+                    <FiLayers size={16} />
+                    Let's discuss your next project.
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-[#00A8FF] sm:-bottom-5 sm:-left-5" />
@@ -213,8 +215,7 @@ const Contact = () => {
               <>
                 <a
                   href={`tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`}
-                  className="mt-3 block break-words text-sm font-medium text-gray-700 hover:text-[#00A8FF]"
-                >
+                  className="mt-3 block break-words text-sm font-medium text-gray-700 hover:text-[#00A8FF]">
                   {CONTACT.phone}
                 </a>
 
@@ -222,8 +223,7 @@ const Contact = () => {
                   href={`https://wa.me/${CONTACT.phone.replace(/\D/g, "")}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-[#111111]"
-                >
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-[#111111]">
                   Chat on WhatsApp
                   <FiArrowUpRight size={13} />
                 </a>
@@ -248,8 +248,7 @@ const Contact = () => {
             {CONTACT.email ? (
               <a
                 href={`mailto:${CONTACT.email}`}
-                className="mt-3 block break-words text-sm leading-6 text-gray-700 hover:text-[#00A8FF]"
-              >
+                className="mt-3 block break-words text-sm leading-6 text-gray-700 hover:text-[#00A8FF]">
                 {CONTACT.email}
               </a>
             ) : (
@@ -287,8 +286,7 @@ const Contact = () => {
               )}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#111111] hover:text-[#00A8FF]"
-            >
+              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#111111] hover:text-[#00A8FF]">
               Get Directions
               <FiArrowUpRight size={14} />
             </a>
@@ -297,7 +295,7 @@ const Contact = () => {
           {/* PROJECT ENQUIRIES */}
           <article className="rounded-2xl bg-[#F7F9FA] p-6 transition-colors duration-300 hover:bg-gray-100">
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#111111] text-white">
-              <FiClock size={21} />
+              <FiClock size={21}/>
             </span>
 
             <h2 className="mt-5 text-lg font-bold text-[#111111]">
@@ -311,8 +309,7 @@ const Contact = () => {
 
             <a
               href="#contact-form"
-              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#111111] hover:text-[#FF2095]"
-            >
+              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#111111] hover:text-[#FF2095]">
               Send an Enquiry
               <FiArrowUpRight size={14} />
             </a>
@@ -325,8 +322,7 @@ const Contact = () => {
       ===================================================== */}
       <section
         id="contact-form"
-        className="scroll-mt-24 bg-white pb-20 sm:pb-24"
-      >
+        className="scroll-mt-24 bg-white pb-20 sm:pb-24">
         <div className="mx-auto grid max-w-7xl items-start gap-12 px-5 md:px-8 lg:grid-cols-2 lg:gap-16 lg:px-10">
           {/* FORM */}
           <div>
@@ -353,15 +349,13 @@ const Contact = () => {
 
             <form
               onSubmit={handleSubmit}
-              className="mt-8 space-y-5"
-            >
+              className="mt-8 space-y-5">
               {/* NAME AND COMPANY */}
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="fullName"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Full Name <span className="text-[#FF2095]">*</span>
                   </label>
 
@@ -373,15 +367,13 @@ const Contact = () => {
                     placeholder="Your full name"
                     className={inputClass}
                     required
-                    maxLength={100}
-                  />
+                    maxLength={100}/>
                 </div>
 
                 <div>
                   <label
                     htmlFor="companyName"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Company / Organisation
                   </label>
 
@@ -392,8 +384,7 @@ const Contact = () => {
                     autoComplete="organization"
                     placeholder="Your company name"
                     className={inputClass}
-                    maxLength={150}
-                  />
+                    maxLength={150}/>
                 </div>
               </div>
 
@@ -402,8 +393,7 @@ const Contact = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Email Address <span className="text-[#FF2095]">*</span>
                   </label>
 
@@ -415,15 +405,13 @@ const Contact = () => {
                     placeholder="you@example.com"
                     className={inputClass}
                     required
-                    maxLength={254}
-                  />
+                    maxLength={254}/>
                 </div>
 
                 <div>
                   <label
                     htmlFor="phone"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Phone / WhatsApp <span className="text-[#FF2095]">*</span>
                   </label>
 
@@ -435,8 +423,7 @@ const Contact = () => {
                     placeholder="+234 ..."
                     className={inputClass}
                     required
-                    maxLength={30}
-                  />
+                    maxLength={30}/>
                 </div>
               </div>
 
@@ -445,8 +432,7 @@ const Contact = () => {
                 <div>
                   <label
                     htmlFor="service"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Service Interested In{" "}
                     <span className="text-[#FF2095]">*</span>
                   </label>
@@ -456,8 +442,7 @@ const Contact = () => {
                     name="service"
                     defaultValue=""
                     className={inputClass}
-                    required
-                  >
+                    required>
                     <option value="" disabled>
                       Select a service
                     </option>
@@ -473,8 +458,7 @@ const Contact = () => {
                 <div>
                   <label
                     htmlFor="quantity"
-                    className="text-sm font-semibold text-[#111111]"
-                  >
+                    className="text-sm font-semibold text-[#111111]">
                     Estimated Quantity
                   </label>
 
@@ -484,8 +468,7 @@ const Contact = () => {
                     type="text"
                     placeholder="e.g. 200 pieces"
                     className={inputClass}
-                    maxLength={100}
-                  />
+                    maxLength={100}/>
                 </div>
               </div>
 
@@ -493,8 +476,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="timeline"
-                  className="text-sm font-semibold text-[#111111]"
-                >
+                  className="text-sm font-semibold text-[#111111]">
                   Expected Timeline
                 </label>
 
@@ -502,8 +484,7 @@ const Contact = () => {
                   id="timeline"
                   name="timeline"
                   defaultValue=""
-                  className={inputClass}
-                >
+                  className={inputClass}>
                   <option value="">
                     Select your preferred timeline
                   </option>
@@ -576,8 +557,7 @@ const Contact = () => {
 
                 <FiSend
                   size={17}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                />
+                  className="transition-transform duration-300 group-hover:translate-x-1"/>
               </button>
 
               <p className="flex items-start gap-2 text-xs leading-5 text-gray-500">
@@ -684,17 +664,12 @@ const Contact = () => {
 
             <FiArrowUpRight
               size={18}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
           </Link>
         </div>
       </section>
     </main>
   );
 };
-
-function FiMessageCircleFallback() {
-  return <FiLayers size={16} />;
-}
 
 export default Contact;
